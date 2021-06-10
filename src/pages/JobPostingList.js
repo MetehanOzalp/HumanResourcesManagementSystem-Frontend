@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Header } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
@@ -14,7 +14,8 @@ export default function JobPostingList() {
 
   return (
     <div>
-      <Table celled>
+      <Header size="large">İs İlanları</Header>
+      <Table selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Açıklama</Table.HeaderCell>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Button, Header } from "semantic-ui-react";
 import JobSeekerService from "../services/jobSeekerService";
 
 export default function JobSeekerList() {
@@ -14,12 +14,14 @@ export default function JobSeekerList() {
 
   return (
     <div>
-      <Table celled>
+      <Header size="large">İs Arayanlar</Header>
+      <Table selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Adı</Table.HeaderCell>
             <Table.HeaderCell>Soyadı</Table.HeaderCell>
             <Table.HeaderCell>Email</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -29,13 +31,16 @@ export default function JobSeekerList() {
               <Table.Cell>{jobSeeker.firstName}</Table.Cell>
               <Table.Cell>{jobSeeker.lastName}</Table.Cell>
               <Table.Cell>{jobSeeker.email}</Table.Cell>
+              <Table.Cell>
+                <Button content="Secondary" secondary />
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
 
         <Table.Footer>
           <Table.Row>
-            <Table.HeaderCell colSpan="3">
+            <Table.HeaderCell colSpan="4">
               <Menu floated="right" pagination>
                 <Menu.Item as="a" icon>
                   <Icon name="chevron left" />

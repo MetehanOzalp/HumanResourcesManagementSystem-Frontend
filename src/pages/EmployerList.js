@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Header } from "semantic-ui-react";
 import EmployerService from "../services/employerService";
 
 export default function EmployerList() {
@@ -14,7 +14,8 @@ export default function EmployerList() {
 
   return (
     <div>
-      <Table celled>
+      <Header size="large">İs Verenler</Header>
+      <Table selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Sirket Adı</Table.HeaderCell>
