@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Icon, Menu, Table, Header } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
+import { Button, Icon, Item, Label } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
@@ -14,7 +15,7 @@ export default function JobPostingList() {
 
   return (
     <div>
-      <Header size="large">İs İlanları</Header>
+      {/* <Header size="large">İs İlanları</Header>
       <Table selectable>
         <Table.Header>
           <Table.Row>
@@ -60,7 +61,36 @@ export default function JobPostingList() {
             </Table.HeaderCell>
           </Table.Row>
         </Table.Footer>
-      </Table>
+      </Table> */}
+      <Item.Group divided>
+        {jobPostings.map((jobPosting) => (
+          <Item key={jobPosting.id}>
+            <Item.Content>
+              <Item.Header as={NavLink} to={`/jobPostings/${jobPosting.id}`}>
+                {jobPosting.jobPosition.name}
+              </Item.Header>
+              <Item.Meta>
+                <span className="cinema">
+                  {jobPosting.employer.companyName}
+                </span>
+              </Item.Meta>
+              <Item.Description>{jobPosting.jobDescription}</Item.Description>
+              <Item.Extra>
+                <Button
+                  primary
+                  floated="right"
+                  as={NavLink}
+                  to={`/jobPostings/${jobPosting.id}`}
+                >
+                  Detaylar
+                  <Icon name="right chevron" />
+                </Button>
+                <Label>Açık pozisyon : {jobPosting.openPositionCount}</Label>
+              </Item.Extra>
+            </Item.Content>
+          </Item>
+        ))}
+      </Item.Group>
     </div>
   );
 }
