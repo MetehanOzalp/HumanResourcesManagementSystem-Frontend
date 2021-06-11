@@ -86,6 +86,8 @@ export default function JobPostingList() {
                   <Icon name="right chevron" />
                 </Button>
                 <Label>Açık pozisyon : {jobPosting.openPositionCount}</Label>
+                <Label>{jobPosting.typeOfWorking?.name}</Label>
+                <Label>{jobPosting.wayOfWorking?.name}</Label>
               </Item.Extra>
             </Item.Content>
           </Item>

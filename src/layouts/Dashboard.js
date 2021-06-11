@@ -19,10 +19,10 @@ export default function Dashboard() {
           <Grid.Column width={12}>
             <Route exact path="/" component={JobPostingList} />
             <Route exact path="/jobPostings" component={JobPostingList} />
-            <Route exact path="/jobPostings/:id" component={JobPostingDetail} />
-            <Route exact path="/employers" component={EmployerList} />
-            <Route exact path="/employees" component={EmployeeList} />
-            <Route exact path="/jobSeekers" component={JobSeekerList} />
+            <Route path="/jobPostings/:id" component={JobPostingDetail} />
+            <Route path="/employers" component={EmployerList} />
+            <Route path="/employees" component={EmployeeList} />
+            <Route path="/jobSeekers" component={JobSeekerList} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

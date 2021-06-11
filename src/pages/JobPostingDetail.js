@@ -20,7 +20,7 @@ export default function JobPostingDetail() {
       <Card.Group>
         <Card fluid color="green">
           <Card.Content>
-            <Card.Header>{jobPosting.jobDescription}</Card.Header>
+            <Card.Header>{jobPosting.jobPosition?.name}</Card.Header>
             <Card.Meta>Friends of Elliot</Card.Meta>
             <Card.Description>
               Steve wants to add you to the group <strong>best friends</strong>
