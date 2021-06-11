@@ -7,6 +7,7 @@ import EmployeeList from "../pages/EmployeeList";
 import JobPostingList from "../pages/JobPostingList";
 import { Route } from "react-router";
 import JobPostingDetail from "../pages/JobPostingDetail";
+import JobPostingAdd from "../pages/JobPostingAdd";
 
 export default function Dashboard() {
   return (
@@ -20,6 +21,7 @@ export default function Dashboard() {
             <Route exact path="/" component={JobPostingList} />
             <Route exact path="/jobPostings" component={JobPostingList} />
             <Route path="/jobPostings/:id" component={JobPostingDetail} />
+            <Route path="/postJob/add" component={JobPostingAdd} />
             <Route path="/employers" component={EmployerList} />
             <Route path="/employees" component={EmployeeList} />
             <Route path="/jobSeekers" component={JobSeekerList} />
