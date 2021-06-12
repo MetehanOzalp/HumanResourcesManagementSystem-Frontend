@@ -1,12 +1,32 @@
 import { useFormik } from 'formik'
 import { Button, Form, Message } from 'semantic-ui-react'
 import *as Yup from "yup"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import JobPostingService from '../services/jobPostingService';
+import CityService from '../services/cityService';
+import JobPositionService from '../services/jobPositionService';
+import WayOfWorkingService from '../services/wayOfWorkingService';
+import TypeOfWorkingService from '../services/typeOfWorkingService';
 
 export default function JobPostingAdd() {
 
-    const { values, errors, handleChange, handleSubmit, handleReset, dirty, isSubmitting, touched } = useFormik({
+    const [cities, setCities] = useState([])
+    const [jobPositions, setJobPositions] = useState([])
+    const [waysOfWorking, setWaysOfWorking] = useState([])
+    const [typesOfWorking, setTypesOfWorking] = useState([])
+
+    useEffect(() => {
+        let cityService = new CityService();
+        cityService.getCities().then((result) => setCities(result.data.data));
+        let jobPositionService = new JobPositionService();
+        jobPositionService.getJobPositions().then(result => setJobPositions(result.data.data));
+        let wayOfWorkingService = new WayOfWorkingService();
+        wayOfWorkingService.getWaysOfWorking().then(result => setWaysOfWorking(result.data.data));
+        let typeOfWorkingService = new TypeOfWorkingService();
+        typeOfWorkingService.getTypesOfWorking().then(result => setTypesOfWorking(result.data.data));
+    }, []);
+
+    const { values, errors, handleChange, handleSubmit, touched } = useFormik({
         initialValues: {
             jobDescription: "",
             minSalary: "",
@@ -43,7 +63,7 @@ export default function JobPostingAdd() {
             <Form onSubmit={handleSubmit}>
                 <Form.Field>
                     <label>Açıklama</label>
-                    <input name="jobDescription" placeholder='Açıklama' value={values.jobDescription} onChange={handleChange} />
+                    <textarea name="jobDescription" placeholder='Açıklama' value={values.jobDescription} onChange={handleChange} />
                     {
                         errors.jobDescription && touched.jobDescription &&
                         <Message color='red'>{errors.jobDescription}</Message>
@@ -83,7 +103,12 @@ export default function JobPostingAdd() {
                 </Form.Field>
                 <Form.Field>
                     <label>Çalışma Türü</label>
-                    <input name="typeOfWorkingId" value={values.typeOfWorkingId} onChange={handleChange} />
+                    <select id="typeOfWorkingId" name="typeOfWorkingId" value={values.typeOfWorkingId} onChange={handleChange}>
+                        <option value="">Çalışma türü seçiniz</option>
+                        {typesOfWorking.map(typeOfWorking => (
+                            <option value={typeOfWorking.id}>{typeOfWorking.name}</option>
+                        ))}
+                    </select>
                     {
                         errors.typeOfWorkingId && touched.typeOfWorkingId &&
                         <Message color='red'>{errors.typeOfWorkingId}</Message>
@@ -91,7 +116,12 @@ export default function JobPostingAdd() {
                 </Form.Field>
                 <Form.Field>
                     <label>Çalışma Şekli</label>
-                    <input name="wayOfWorkingId" value={values.wayOfWorkingId} onChange={handleChange} />
+                    <select id="wayOfWorkingId" name="wayOfWorkingId" value={values.wayOfWorkingId} onChange={handleChange}>
+                        <option value="">Çalışma şekli seçiniz</option>
+                        {waysOfWorking.map(wayOfWorking => (
+                            <option value={wayOfWorking.id}>{wayOfWorking.name}</option>
+                        ))}
+                    </select>
                     {
                         errors.wayOfWorkingId && touched.wayOfWorkingId &&
                         <Message color='red'>{errors.wayOfWorkingId}</Message>
@@ -99,7 +129,7 @@ export default function JobPostingAdd() {
                 </Form.Field>
                 <Form.Field>
                     <label>İşveren</label>
-                    <input name="employerId" value={values.employerId} onChange={handleChange} />
+                    <input id="employerId" name="employerId" value={values.employerId} onChange={handleChange} />
                     {
                         errors.employerId && touched.employerId &&
                         <Message color='red'>{errors.employerId}</Message>
@@ -107,7 +137,12 @@ export default function JobPostingAdd() {
                 </Form.Field>
                 <Form.Field>
                     <label>İş pozisyonu</label>
-                    <input name="jobPositionId" value={values.jobPositionId} onChange={handleChange} />
+                    <select id="jobPositionId" name="jobPositionId" value={values.jobPositionId} onChange={handleChange}>
+                        <option value="">İş pozisyonu seçiniz</option>
+                        {jobPositions.map(jobPosition => (
+                            <option value={jobPosition.id}>{jobPosition.name}</option>
+                        ))}
+                    </select>
                     {
                         errors.jobPositionId && touched.jobPositionId &&
                         <Message color='red'>{errors.jobPositionId}</Message>
@@ -115,7 +150,10 @@ export default function JobPostingAdd() {
                 </Form.Field>
                 <Form.Field>
                     <label>Şehir</label>
-                    <input name="cityId" value={values.cityId} onChange={handleChange} />
+                    <select id="cityId" name="cityId" value={values.cityId} onChange={handleChange}>
+                        <option value="">Şehir seçiniz</option>
+                        {cities.map(city => (<option key={city.id} value={city.id} selected>{city.name}</option>))}
+                    </select>
                     {
                         errors.cityId && touched.cityId &&
                         <Message color='red'>{errors.cityId}</Message>
