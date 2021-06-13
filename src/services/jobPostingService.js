@@ -21,4 +21,8 @@ export default class JobPostingService {
   changeJobPostingStatus(id) {
     return axios.post(`http://localhost:8080/api/jobPosting/changeStatus?jobPostingId=${id}`);
   }
+
+  deleteJobPostingId(id) {
+    return axios.post(`http://localhost:8080/api/jobPosting/delete?jobPostingId=${id}`);
+  }
 }

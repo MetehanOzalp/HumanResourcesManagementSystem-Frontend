@@ -17,12 +17,16 @@ export default function PassiveJobPostingsList() {
         jobPostingService.changeJobPostingStatus(id).then(id + " onaylandı");
     }
 
+    const deleteJobPosting = (id) => {
+        jobPostingService.deleteJobPostingId(id).then(id + " silindi");
+    }
+
     return (
         <div>
             <Table selectable>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell>Açıklama</Table.HeaderCell>
+                        <Table.HeaderCell>Pozisyon</Table.HeaderCell>
                         <Table.HeaderCell>Sirket Adı</Table.HeaderCell>
                         <Table.HeaderCell>Sehir</Table.HeaderCell>
                         <Table.HeaderCell>Alım Sayısı</Table.HeaderCell>
@@ -35,7 +39,7 @@ export default function PassiveJobPostingsList() {
                 <Table.Body>
                     {jobPostings.map((jobPosting) => (
                         <Table.Row key={jobPosting.id}>
-                            <Table.Cell>{jobPosting.jobDescription}</Table.Cell>
+                            <Table.Cell>{jobPosting.jobPosition?.name}</Table.Cell>
                             <Table.Cell>{jobPosting.employer.companyName}</Table.Cell>
                             <Table.Cell>{jobPosting.city.name}</Table.Cell>
                             <Table.Cell>{jobPosting.openPositionCount}</Table.Cell>
@@ -45,7 +49,7 @@ export default function PassiveJobPostingsList() {
                             </Table.Cell>
                             <Table.Cell>
                                 <Button.Group >
-                                    <Button negative>Sil</Button>
+                                    <Button negative onClick={(e) => deleteJobPosting(jobPosting.id)}>Sil</Button>
                                     <Button positive onClick={(e) => changePassiveJobPostingStatus(jobPosting.id)}>Onayla</Button>
                                 </Button.Group>
                             </Table.Cell>
