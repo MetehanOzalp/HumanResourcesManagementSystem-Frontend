@@ -8,6 +8,7 @@ import JobPostingList from "../pages/JobPostingList";
 import { Route } from "react-router";
 import JobPostingDetail from "../pages/JobPostingDetail";
 import JobPostingAdd from "../pages/JobPostingAdd";
+import PassiveJobPostingsList from "../pages/PassiveJobPostingsList";
 
 export default function Dashboard() {
   return (
@@ -21,6 +22,7 @@ export default function Dashboard() {
             <Route exact path="/" component={JobPostingList} />
             <Route exact path="/jobPostings" component={JobPostingList} />
             <Route path="/jobPostings/:id" component={JobPostingDetail} />
+            <Route path="/passiveJobPostings" component={PassiveJobPostingsList} />
             <Route path="/postJob/add" component={JobPostingAdd} />
             <Route path="/employers" component={EmployerList} />
             <Route path="/employees" component={EmployeeList} />

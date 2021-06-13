@@ -11,7 +11,7 @@ export default function JobPostingList() {
     jobPostingService
       .getJobPostings()
       .then((result) => setJobPostings(result.data.data));
-  });
+  }, []);
 
   return (
     <div>
