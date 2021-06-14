@@ -49,8 +49,8 @@ export default function PassiveJobPostingsList() {
                             </Table.Cell>
                             <Table.Cell>
                                 <Button.Group >
-                                    <Button negative onClick={(e) => deleteJobPosting(jobPosting.id)}>Sil</Button>
-                                    <Button positive onClick={(e) => changePassiveJobPostingStatus(jobPosting.id)}>Onayla</Button>
+                                    <Button negative onClick={(e) => deleteJobPosting(jobPosting.id)}><Icon name="trash alternate" /> Sil</Button>
+                                    <Button positive onClick={(e) => changePassiveJobPostingStatus(jobPosting.id)}><Icon name="check" />Onayla</Button>
                                 </Button.Group>
                             </Table.Cell>
                         </Table.Row>
