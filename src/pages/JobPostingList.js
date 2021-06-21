@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Icon, Item, Label } from "semantic-ui-react";
+import { Button, Card, Icon, Item, Label } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
@@ -62,7 +62,9 @@ export default function JobPostingList() {
           </Table.Row>
         </Table.Footer>
       </Table> */}
-      <Item.Group divided>
+
+
+      {/* <Item.Group divided>
         {jobPostings.map((jobPosting) => (
           <Item key={jobPosting.id}>
             <Item.Content>
@@ -92,7 +94,25 @@ export default function JobPostingList() {
             </Item.Content>
           </Item>
         ))}
-      </Item.Group>
+      </Item.Group> */}
+
+      <Card.Group>
+        {jobPostings.map(jobPosting => (
+          <Card fluid key={jobPosting.id} color="blue">
+            <Card.Content header={jobPosting.jobPosition.name} />
+            <Card.Content description={jobPosting.jobDescription} />
+            <Card.Content extra>
+              <Label><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
+              <Label>{jobPosting.typeOfWorking?.name}</Label>
+              <Label>{jobPosting.wayOfWorking?.name}</Label>
+              <Button primary floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
+            </Card.Content>
+          </Card>
+        ))}
+
+      </Card.Group>
+
+
     </div>
   );
 }

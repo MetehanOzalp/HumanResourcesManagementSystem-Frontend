@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import JobPostingService from '../services/jobPostingService';
-import { Menu, Table, Icon, Button } from "semantic-ui-react";
+import { Menu, Header, Table, Icon, Button, Modal } from "semantic-ui-react";
 
 export default function PassiveJobPostingsList() {
     let jobPostingService = new JobPostingService();
+
+    const [open, setOpen] = React.useState(false)
 
     const [jobPostings, setJobPostings] = useState([]);
 
@@ -15,6 +17,7 @@ export default function PassiveJobPostingsList() {
 
     const changePassiveJobPostingStatus = (id) => {
         jobPostingService.changeJobPostingStatus(id).then(id + " onaylandı");
+        setOpen(false);
     }
 
     const deleteJobPosting = (id) => {
@@ -50,7 +53,34 @@ export default function PassiveJobPostingsList() {
                             <Table.Cell>
                                 <Button.Group >
                                     <Button negative onClick={(e) => deleteJobPosting(jobPosting.id)}><Icon name="trash alternate" /> Sil</Button>
-                                    <Button positive onClick={(e) => changePassiveJobPostingStatus(jobPosting.id)}><Icon name="check" />Onayla</Button>
+                                    <Modal
+                                        onClose={() => setOpen(false)}
+                                        onOpen={() => setOpen(true)}
+                                        open={open}
+                                        trigger={<Button positive><Icon name="check" />Onayla</Button>}
+                                    >
+                                        <Modal.Header>İş ilanı onayı</Modal.Header>
+                                        <Modal.Content>
+                                            <Modal.Description>
+                                                <p>
+                                                    Bu iş ilanını onaylamak istiyormusunuz?
+                                                </p>
+                                            </Modal.Description>
+                                        </Modal.Content>
+                                        <Modal.Actions>
+                                            <Button color='red' onClick={() => setOpen(false)}>
+                                                Vazgeç
+                                            </Button>
+                                            <Button
+                                                content="Onayla"
+                                                labelPosition='right'
+                                                icon='checkmark'
+                                                onClick={() => setOpen(false)}
+                                                onClick={() => changePassiveJobPostingStatus(jobPosting.id)}
+                                                positive
+                                            />
+                                        </Modal.Actions>
+                                    </Modal>
                                 </Button.Group>
                             </Table.Cell>
                         </Table.Row>

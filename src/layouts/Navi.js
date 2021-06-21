@@ -17,7 +17,7 @@ export default function Navi() {
 
   return (
     <div>
-      <Menu inverted fixed="top" size="large">
+      <Menu color="purple" inverted fixed="top" size="large">
         <Container>
           <Menu.Item name="home">
             <Icon name="building outline" size="large" />
