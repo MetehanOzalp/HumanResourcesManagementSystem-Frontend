@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Card, Icon, Item, Label } from "semantic-ui-react";
+import { date } from "yup/lib/locale";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
@@ -12,6 +13,13 @@ export default function JobPostingList() {
       .getJobPostings()
       .then((result) => setJobPostings(result.data.data));
   }, []);
+
+  function calculateDay(params) {
+    var date = new Date().getTime();
+    var params = new Date(params).getTime();
+    var howManyDaysAgo = (((((date - params) / 1000) / 60) / 60) / 24);
+    return Math.floor(howManyDaysAgo);
+  }
 
   return (
     <div>
@@ -98,14 +106,15 @@ export default function JobPostingList() {
 
       <Card.Group>
         {jobPostings.map(jobPosting => (
-          <Card fluid key={jobPosting.id} color="blue">
+          <Card fluid key={jobPosting.id} color="teal">
             <Card.Content header={jobPosting.jobPosition.name} />
             <Card.Content description={jobPosting.jobDescription} />
             <Card.Content extra>
               <Label><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
               <Label>{jobPosting.typeOfWorking?.name}</Label>
               <Label>{jobPosting.wayOfWorking?.name}</Label>
-              <Button primary floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
+              <Label><Icon name="clock" />{calculateDay(jobPosting.releaseDate)} gün önce</Label>
+              <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
             </Card.Content>
           </Card>
         ))}
