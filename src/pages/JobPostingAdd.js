@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { Button, Form, Grid, GridColumn, Message } from 'semantic-ui-react'
+import { Button, Form, Grid, GridColumn, Message, Label } from 'semantic-ui-react'
 import *as Yup from "yup"
 import React, { useEffect, useState } from 'react'
 import JobPostingService from '../services/jobPostingService';
@@ -7,6 +7,7 @@ import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService';
 import WayOfWorkingService from '../services/wayOfWorkingService';
 import TypeOfWorkingService from '../services/typeOfWorkingService';
+import { toast } from 'react-toastify';
 
 export default function JobPostingAdd() {
 
@@ -54,7 +55,7 @@ export default function JobPostingAdd() {
             }),
         onSubmit: values => {
             let jobPostingService = new JobPostingService();
-            jobPostingService.add(values).then();
+            jobPostingService.add(values).then(toast.success("İş ilanı eklendi"));
         }
     });
 
@@ -73,7 +74,9 @@ export default function JobPostingAdd() {
                             </select>
                             {
                                 errors.jobPositionId && touched.jobPositionId &&
-                                <Message color='red'>{errors.jobPositionId}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.jobPositionId}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -88,7 +91,9 @@ export default function JobPostingAdd() {
                             </select>
                             {
                                 errors.typeOfWorkingId && touched.typeOfWorkingId &&
-                                <Message color='red'>{errors.typeOfWorkingId}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.typeOfWorkingId}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -103,7 +108,9 @@ export default function JobPostingAdd() {
                             </select>
                             {
                                 errors.wayOfWorkingId && touched.wayOfWorkingId &&
-                                <Message color='red'>{errors.wayOfWorkingId}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.wayOfWorkingId}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -116,7 +123,9 @@ export default function JobPostingAdd() {
                             </select>
                             {
                                 errors.cityId && touched.cityId &&
-                                <Message color='red'>{errors.cityId}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.cityId}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -126,7 +135,9 @@ export default function JobPostingAdd() {
                             <input name="openPositionCount" placeholder='Açık Pozisyon Sayısı' value={values.openPositionCount} onChange={handleChange} />
                             {
                                 errors.openPositionCount && touched.openPositionCount &&
-                                <Message color='red'>{errors.openPositionCount}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.openPositionCount}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -136,7 +147,9 @@ export default function JobPostingAdd() {
                             <input name="applicationDeadline" type="date" value={values.applicationDeadline} onChange={handleChange} />
                             {
                                 errors.applicationDeadline && touched.applicationDeadline &&
-                                <Message color='red'>{errors.applicationDeadline}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.applicationDeadline}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -146,7 +159,9 @@ export default function JobPostingAdd() {
                             <input name="minSalary" placeholder='Minimum Maaş' value={values.minSalary} onChange={handleChange} />
                             {
                                 errors.minSalary && touched.minSalary &&
-                                <Message color='red'>{errors.minSalary}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.minSalary}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -156,7 +171,9 @@ export default function JobPostingAdd() {
                             <input name="maxSalary" placeholder='Maksimum Maaş' value={values.maxSalary} onChange={handleChange} />
                             {
                                 errors.maxSalary && touched.maxSalary &&
-                                <Message color='red'>{errors.maxSalary}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.maxSalary}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -166,7 +183,9 @@ export default function JobPostingAdd() {
                             <input id="employerId" name="employerId" value={values.employerId} onChange={handleChange} />
                             {
                                 errors.employerId && touched.employerId &&
-                                <Message color='red'>{errors.employerId}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.employerId}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
@@ -176,12 +195,14 @@ export default function JobPostingAdd() {
                             <textarea name="jobDescription" placeholder='Açıklama' value={values.jobDescription} onChange={handleChange} />
                             {
                                 errors.jobDescription && touched.jobDescription &&
-                                <Message color='red'>{errors.jobDescription}</Message>
+                                <Label basic color='red' pointing>
+                                    {errors.jobDescription}
+                                </Label>
                             }
                         </Form.Field>
                     </GridColumn>
                 </Grid>
-                <Button type='submit'>İlan Ver</Button>
+                <Button type='submit' color="teal" style={{ marginLeft: "22em", marginTop: "1em" }}>İlan Ver</Button>
             </Form>
         </div>
     )

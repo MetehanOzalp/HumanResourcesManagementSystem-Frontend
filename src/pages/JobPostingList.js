@@ -18,7 +18,11 @@ export default function JobPostingList() {
     var date = new Date().getTime();
     var params = new Date(params).getTime();
     var howManyDaysAgo = (((((date - params) / 1000) / 60) / 60) / 24);
-    return Math.floor(howManyDaysAgo);
+    if (Math.floor(howManyDaysAgo) < 1) {
+      return <Label color="red" tag>Yeni ilan</Label >
+    } else {
+      return <Label color="red"><Icon name="clock" />{Math.floor(howManyDaysAgo)} gün önce</Label>
+    }
   }
 
   return (
@@ -110,10 +114,10 @@ export default function JobPostingList() {
             <Card.Content header={jobPosting.jobPosition.name} />
             <Card.Content description={jobPosting.jobDescription} />
             <Card.Content extra>
-              <Label><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
-              <Label>{jobPosting.typeOfWorking?.name}</Label>
-              <Label>{jobPosting.wayOfWorking?.name}</Label>
-              <Label><Icon name="clock" />{calculateDay(jobPosting.releaseDate)} gün önce</Label>
+              <Label color="blue"><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
+              <Label color="orange">{jobPosting.typeOfWorking?.name}</Label>
+              <Label color="green">{jobPosting.wayOfWorking?.name}</Label>
+              {calculateDay(jobPosting.releaseDate)}
               <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
             </Card.Content>
           </Card>

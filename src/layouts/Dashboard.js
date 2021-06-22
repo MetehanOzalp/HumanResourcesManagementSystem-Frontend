@@ -9,10 +9,12 @@ import { Route } from "react-router";
 import JobPostingDetail from "../pages/JobPostingDetail";
 import JobPostingAdd from "../pages/JobPostingAdd";
 import PassiveJobPostingsList from "../pages/PassiveJobPostingsList";
+import { ToastContainer } from "react-toastify";
 
 export default function Dashboard() {
   return (
     <div>
+      <ToastContainer position="bottom-right" />
       <Grid>
         <Grid.Row>
           <Grid.Column width={4}>

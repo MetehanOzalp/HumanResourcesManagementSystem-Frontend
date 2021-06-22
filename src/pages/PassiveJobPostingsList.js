@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import JobPostingService from '../services/jobPostingService';
 import { Menu, Header, Table, Icon, Button, Modal } from "semantic-ui-react";
+import { toast } from 'react-toastify';
 
 export default function PassiveJobPostingsList() {
     let jobPostingService = new JobPostingService();
@@ -16,12 +17,12 @@ export default function PassiveJobPostingsList() {
     }, []);
 
     const changePassiveJobPostingStatus = (id) => {
-        jobPostingService.changeJobPostingStatus(id).then(id + " onaylandı");
+        jobPostingService.changeJobPostingStatus(id).then(toast.success("İş ilanı onaylandı"));
         setOpen(false);
     }
 
     const deleteJobPosting = (id) => {
-        jobPostingService.deleteJobPostingId(id).then(id + " silindi");
+        jobPostingService.deleteJobPostingId(id).then(toast.success("İş ilanı silindi"));
     }
 
     return (
