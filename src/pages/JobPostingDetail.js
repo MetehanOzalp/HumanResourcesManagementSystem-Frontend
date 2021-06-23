@@ -15,6 +15,20 @@ export default function JobPostingDetail() {
       .then((result) => setJobPosting(result.data.data));
   }, []);
 
+  function calculateHowManyDaysLeft(params) {
+    var applicationDeadline = new Date(params).getTime();
+    var date = new Date().getTime();
+    var remaniningTime = (((((applicationDeadline - date) / 1000) / 60) / 60) / 24);
+    console.log(remaniningTime);
+    if (remaniningTime >= 0 && remaniningTime < 1) {
+      return <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>Son gün<Icon name="warning" color="red" /></Card.Content>
+    } else if (remaniningTime >= 1) {
+      return <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>{Math.floor(remaniningTime)} gün sonra ({params})</Card.Content>
+    } else {
+      return <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>İlan süresi doldu<Icon name="warning" color="red" /></Card.Content>
+    }
+  }
+
   return (
     <div>
       <Card.Group>
@@ -32,13 +46,13 @@ export default function JobPostingDetail() {
                 <Card.Content><Icon name="map marker alternate" /><b>Sehir: </b>{jobPosting.city?.name}</Card.Content>
                 <Card.Content><b>Çalısma türü: </b>{jobPosting.typeOfWorking?.name}</Card.Content>
                 <Card.Content><b>Çalısma sekli: </b>{jobPosting.wayOfWorking?.name}</Card.Content>
-                <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>{jobPosting.applicationDeadline}</Card.Content>
+                {calculateHowManyDaysLeft(jobPosting.applicationDeadline)}
               </Card>
               <Card fluid style={{ marginTop: "1em" }}>
                 <Card.Content header='İsveren Bilgileri' />
                 <Card.Content><Icon name="mail" /><b>Email: </b>{jobPosting.employer?.email}</Card.Content>
-                <Card.Content><b>Sirket adı: </b>{jobPosting.employer?.companyName}</Card.Content>
-                <Card.Content><b>Web site: </b>{jobPosting.employer?.webSite}</Card.Content>
+                <Card.Content><Icon name="building"></Icon><b>Sirket adı: </b>{jobPosting.employer?.companyName}</Card.Content>
+                <Card.Content><Icon name="world" /><b>Web site: </b>{jobPosting.employer?.webSite}</Card.Content>
                 <Card.Content><Icon name="phone" /><b>Telefon numarası: </b>{jobPosting.employer?.phoneNumber}</Card.Content>
               </Card>
             </Card.Description>
