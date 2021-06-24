@@ -10,6 +10,7 @@ import JobPostingDetail from "../pages/JobPostingDetail";
 import JobPostingAdd from "../pages/JobPostingAdd";
 import PassiveJobPostingsList from "../pages/PassiveJobPostingsList";
 import { ToastContainer } from "react-toastify";
+import Cv from "../pages/Cv";
 
 export default function Dashboard() {
   return (
@@ -29,6 +30,7 @@ export default function Dashboard() {
             <Route path="/employers" component={EmployerList} />
             <Route path="/employees" component={EmployeeList} />
             <Route path="/jobSeekers" component={JobSeekerList} />
+            <Route path="/cv" component={Cv} />
           </Grid.Column>
         </Grid.Row>
       </Grid>
