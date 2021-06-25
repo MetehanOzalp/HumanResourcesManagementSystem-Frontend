@@ -12,30 +12,32 @@ import PassiveJobPostingsList from "../pages/PassiveJobPostingsList";
 import { ToastContainer } from "react-toastify";
 import Cv from "../pages/Cv";
 import Favorites from "../pages/Favorites";
+import CvUpdate from "../pages/CvUpdate";
 
 export default function Dashboard() {
   return (
     <div>
       <ToastContainer position="bottom-right" />
-      <Grid>
-        <Grid.Row>
-          <Grid.Column width={4}>
+      {/* <Grid> */}
+      {/* <Grid.Row> */}
+      {/* <Grid.Column width={4}>
             <Sidebar />
-          </Grid.Column>
-          <Grid.Column width={12}>
-            <Route exact path="/" component={JobPostingList} />
-            <Route exact path="/jobPostings" component={JobPostingList} />
-            <Route path="/jobPostings/:id" component={JobPostingDetail} />
-            <Route path="/passiveJobPostings" component={PassiveJobPostingsList} />
-            <Route path="/postJob/add" component={JobPostingAdd} />
-            <Route path="/employers" component={EmployerList} />
-            <Route path="/employees" component={EmployeeList} />
-            <Route path="/jobSeekers" component={JobSeekerList} />
-            <Route path="/cv" component={Cv} />
-            <Route path="/favorites" component={Favorites} />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+          </Grid.Column> */}
+      {/* <Grid.Column width={12}> */}
+      <Route exact path="/" component={JobPostingList} />
+      <Route exact path="/jobPostings" component={JobPostingList} />
+      <Route path="/jobPostings/:id" component={JobPostingDetail} />
+      <Route path="/passiveJobPostings" component={PassiveJobPostingsList} />
+      <Route path="/postJob/add" component={JobPostingAdd} />
+      <Route path="/employers" component={EmployerList} />
+      <Route path="/employees" component={EmployeeList} />
+      <Route path="/jobSeekers" component={JobSeekerList} />
+      <Route exact path="/cv" component={Cv} />
+      <Route path="/cv/update" component={CvUpdate} />
+      <Route path="/favorites" component={Favorites} />
+      {/* </Grid.Column> */}
+      {/* </Grid.Row> */}
+      {/* </Grid> */}
     </div>
   );
 }
