@@ -10,6 +10,10 @@ export default function SignedIn({ signOut }) {
     history.push("/cv");
   }
 
+  const handleToFavorites = () => {
+    history.push("/favorites");
+  }
+
   return (
     <div>
       <Menu.Item>
@@ -22,6 +26,7 @@ export default function SignedIn({ signOut }) {
           <Dropdown.Menu>
             <Dropdown.Item text="Bilgilerim" icon="info" />
             <Dropdown.Item onClick={() => handleToCv()} text="Cv" icon="file" />
+            <Dropdown.Item onClick={() => handleToFavorites()} text="Favorilerim" icon="heart" />
             <Dropdown.Item onClick={signOut} text="Çıkış Yap" icon="sign-out" />
           </Dropdown.Menu>
         </Dropdown>

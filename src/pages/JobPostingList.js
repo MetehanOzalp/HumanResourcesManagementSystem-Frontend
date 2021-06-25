@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Card, Icon, Item, Label } from "semantic-ui-react";
-import { date } from "yup/lib/locale";
+import { Button, Card, Icon, Label } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
@@ -122,7 +121,6 @@ export default function JobPostingList() {
             </Card.Content>
           </Card>
         ))}
-
       </Card.Group>
 
 

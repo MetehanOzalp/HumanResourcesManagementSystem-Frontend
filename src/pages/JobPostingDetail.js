@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import JobPostingService from "../services/jobPostingService";
 import { Button, Card, Icon } from "semantic-ui-react";
+import FavoriteService from "../services/favoriteService";
+import { toast } from "react-toastify";
 
 export default function JobPostingDetail() {
   let { id } = useParams();
@@ -15,11 +17,19 @@ export default function JobPostingDetail() {
       .then((result) => setJobPosting(result.data.data));
   }, []);
 
+  const addToFavorites = () => {
+    let favoriteService = new FavoriteService();
+    const favorite = {
+      userId: 8,
+      jobPostingId: id
+    }
+    favoriteService.add(favorite).then(toast.success("Favorilere eklendi"))
+  }
+
   function calculateHowManyDaysLeft(params) {
     var applicationDeadline = new Date(params).getTime();
     var date = new Date().getTime();
     var remaniningTime = (((((applicationDeadline - date) / 1000) / 60) / 60) / 24);
-    console.log(remaniningTime);
     if (remaniningTime >= 0 && remaniningTime < 1) {
       return <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>Son gün<Icon name="warning" color="red" /></Card.Content>
     } else if (remaniningTime >= 1) {
@@ -62,7 +72,7 @@ export default function JobPostingDetail() {
               <Button color="teal">
                 Basvur
               </Button>
-              <Button color="red">
+              <Button color="red" onClick={() => addToFavorites()}>
                 Favorilere Ekle
               </Button>
             </div>
