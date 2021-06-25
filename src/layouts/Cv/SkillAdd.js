@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
-import { Button, Form, Grid, GridColumn, Message, Label, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, GridColumn, Label, Modal, Icon } from 'semantic-ui-react'
 import *as Yup from "yup"
 import { toast } from 'react-toastify';
 import CvService from '../../services/cvService';
 
-export default function SkillAdd() {
+export default function SkillAdd({cvId}) {
 
-    const [cvId, setCvId] = useState(0);
+    const [open, setOpen] = useState(false)
 
     useEffect(() => {
         let cvService = new CvService();
-        cvService.getCvByJobSeekerId(8).then((result) => setCvId(result.data.data[0].id));
+        // cvService.getCvByJobSeekerId(8).then((result) => setCvId(result.data.data[0].id));
     }, []);
 
     const { values, errors, handleChange, handleSubmit, touched } = useFormik({
@@ -32,25 +32,38 @@ export default function SkillAdd() {
 
     return (
         <div>
-            <Segment color="blue">
-                <Form onSubmit={handleSubmit}>
-                    <Grid stackable>
-                        <GridColumn width={7}>
-                            <Form.Field>
-                                <label>Yetenek Adı</label>
-                                <input name="skillName" placeholder='Yetenek Adı' value={values.skillName} onChange={handleChange} />
-                                {
-                                    errors.skillName && touched.skillName &&
-                                    <Label basic color='red' pointing>
-                                        {errors.skillName}
-                                    </Label>
-                                }
-                            </Form.Field>
-                        </GridColumn>
-                    </Grid>
-                    <Button type='submit' color="teal" style={{ marginLeft: "22em", marginTop: "1em" }}>Ekle</Button>
-                </Form>
-            </Segment>
+            <Modal
+                onClose={() => setOpen(false)}
+                onOpen={() => setOpen(true)}
+                open={open}
+                trigger={<Button floated="right" color="blue" style={{ marginBottom: ".5em", marginRight: ".5em" }}><Icon name="add"></Icon>Ekle</Button>}
+            >
+                <Modal.Header>Yetenek Ekle</Modal.Header>
+                <Modal.Description>
+                    <Form onSubmit={handleSubmit} style={{ marginTop: "1em", marginLeft: "1em", marginBottom: "1em" }}>
+                        <Grid stackable>
+                            <GridColumn width={7}>
+                                <Form.Field>
+                                    <label>Yetenek Adı</label>
+                                    <input name="skillName" placeholder='Yetenek Adı' value={values.skillName} onChange={handleChange} />
+                                    {
+                                        errors.skillName && touched.skillName &&
+                                        <Label basic color='red' pointing>
+                                            {errors.skillName}
+                                        </Label>
+                                    }
+                                </Form.Field>
+                            </GridColumn>
+                        </Grid>
+                        <Modal.Actions>
+                            <Button color='red' onClick={() => setOpen(false)}>
+                                Vazgeç
+                            </Button>
+                            <Button type='submit' color="teal" style={{ marginLeft: "22em", marginTop: "1em" }}>Ekle</Button>
+                        </Modal.Actions>
+                    </Form>
+                </Modal.Description>
+            </Modal>
         </div>
     )
 }

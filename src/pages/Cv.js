@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import CvService from '../services/cvService';
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+import { Button, Card, Image } from "semantic-ui-react";
+import EducationAdd from '../layouts/Cv/EducationAdd';
+import ExperienceAdd from '../layouts/Cv/ExperienceAdd';
+import ForeignLanguageAdd from '../layouts/Cv/ForeignLanguageAdd';
+import SkillAdd from '../layouts/Cv/SkillAdd';
 
 export default function Cv() {
 
@@ -44,6 +48,7 @@ export default function Cv() {
                                             </Card.Content>
                                         </Card>
                                     ))}
+                                    <EducationAdd cvId={cv.id} />
                                 </Card>
 
                                 <Card fluid style={{ marginTop: "1em" }} color="red">
@@ -59,7 +64,7 @@ export default function Cv() {
                                             </Card.Content>
                                         </Card>
                                     ))}
-
+                                    <ExperienceAdd cvId={cv.id} />
                                 </Card>
                                 <Card fluid style={{ marginTop: "1em" }} color="red">
                                     <Card.Content header='Yetenekler' />
@@ -72,6 +77,7 @@ export default function Cv() {
                                             </Card.Content>
                                         </Card>
                                     ))}
+                                    <SkillAdd cvId={cv.id} />
                                 </Card>
                                 <Card fluid style={{ marginTop: "1em" }} color="red">
                                     <Card.Content header='Yabancı Diller' />
@@ -85,6 +91,7 @@ export default function Cv() {
                                             </Card.Content>
                                         </Card>
                                     ))}
+                                    <ForeignLanguageAdd cvId={cv.id} />
                                 </Card>
                             </Card.Description>
                         </Card.Content>

@@ -12,7 +12,6 @@ import PassiveJobPostingsList from "../pages/PassiveJobPostingsList";
 import { ToastContainer } from "react-toastify";
 import Cv from "../pages/Cv";
 import Favorites from "../pages/Favorites";
-import CvUpdate from "../pages/CvUpdate";
 
 export default function Dashboard() {
   return (
@@ -33,7 +32,6 @@ export default function Dashboard() {
       <Route path="/employees" component={EmployeeList} />
       <Route path="/jobSeekers" component={JobSeekerList} />
       <Route exact path="/cv" component={Cv} />
-      <Route path="/cv/update" component={CvUpdate} />
       <Route path="/favorites" component={Favorites} />
       {/* </Grid.Column> */}
       {/* </Grid.Row> */}
