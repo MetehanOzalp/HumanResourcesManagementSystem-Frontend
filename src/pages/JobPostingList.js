@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Card, Icon, Label } from "semantic-ui-react";
+import { Button, Card, Icon, Label, Pagination } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function JobPostingList() {
   const [jobPostings, setJobPostings] = useState([]);
+  const [activePage, setActivePage] = useState(1)
+
+  let jobPostingService = new JobPostingService();
 
   useEffect(() => {
-    let jobPostingService = new JobPostingService();
     jobPostingService
-      .getJobPostings()
+      .getPageableJobPostings(activePage)
       .then((result) => setJobPostings(result.data.data));
   }, []);
 
@@ -22,6 +24,11 @@ export default function JobPostingList() {
     } else {
       return <Label color="red"><Icon name="clock" />{Math.floor(howManyDaysAgo)} gün önce</Label>
     }
+  }
+
+  const handlePageChange = (e, { activePage }) => {
+    setActivePage(activePage);
+    jobPostingService.getPageableJobPostings(activePage).then((result) => setJobPostings(result.data.data));
   }
 
   return (
@@ -121,6 +128,14 @@ export default function JobPostingList() {
             </Card.Content>
           </Card>
         ))}
+        <Pagination
+          defaultActivePage={1}
+          pointing
+          secondary
+          totalPages={3}
+          onPageChange={handlePageChange}
+        />
+        {/* <Pagination defaultActivePage={5} totalPages={10} onPageChange={() => (handlePageChange)} /> */}
       </Card.Group>
 
 

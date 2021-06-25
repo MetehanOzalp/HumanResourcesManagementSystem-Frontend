@@ -10,6 +10,10 @@ export default class JobPostingService {
     return axios.get("http://localhost:8080/api/jobPosting/getByActive");
   }
 
+  getPageableJobPostings(pageNumber) {
+    return axios.get(`http://localhost:8080/api/jobPosting/getByActiveAndPageable?pageNumber=${pageNumber}`);
+  }
+
   getPassiveJobPostings() {
     return axios.get("http://localhost:8080/api/jobPosting/getByPassive");
   }
