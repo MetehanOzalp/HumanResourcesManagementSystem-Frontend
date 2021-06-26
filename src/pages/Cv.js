@@ -9,6 +9,10 @@ import ForeignLanguageAdd from '../layouts/Cv/ForeignLanguageAdd';
 import ForeignLanguageUpdateModal from '../layouts/Cv/ForeignLanguageUpdateModal';
 import SkillAdd from '../layouts/Cv/SkillAdd';
 import SkillUpdateModal from '../layouts/Cv/SkillUpdateModal';
+import EducationDeleteModal from '../layouts/Cv/EducationDeleteModal';
+import ExperienceDeleteModal from '../layouts/Cv/ExperienceDeleteModal';
+import SkillDeleteModal from '../layouts/Cv/SkillDeleteModal';
+import ForeignLanguageDeleteModal from '../layouts/Cv/ForeignLanguageDeleteModal';
 
 export default function Cv() {
 
@@ -40,10 +44,11 @@ export default function Cv() {
                                 <Card fluid style={{ marginTop: "1em" }} color="red">
                                     <Card.Content header='Eğitim' />
                                     {cv.jobSeekerEducations?.map(education => (
-                                        <Card fluid style={{ marginTop: "1em" }} key={education.id}>
+                                        <Card fluid style={{ marginTop: ".5em" }} key={education.id}>
                                             <Card.Content>
                                                 <Card.Content><h4>{education.schoolName}</h4></Card.Content>
                                                 <EducationUpdateModal education={education} />
+                                                <EducationDeleteModal id={education.id} />
                                                 <Card.Meta>{education.fieldOfStudy}</Card.Meta>
                                                 <Card.Description>
                                                     <b>Derece: </b>{education.degree}
@@ -56,13 +61,14 @@ export default function Cv() {
                                     <EducationAdd cvId={cv.id} />
                                 </Card>
 
-                                <Card fluid style={{ marginTop: "1em" }} color="red">
+                                <Card fluid style={{ marginTop: ".5em" }} color="red">
                                     <Card.Content header='Deneyim' />
                                     {cv.jobSeekerExperiences.map(experience => (
                                         <Card fluid style={{ marginTop: "1em" }} key={experience.id}>
                                             <Card.Content>
                                                 <Card.Content><h4>{experience.businessName}</h4></Card.Content>
                                                 <ExperienceUpdateModal experience={experience} />
+                                                <ExperienceDeleteModal id={experience.id} />
                                                 <Card.Meta>{experience.positionName}</Card.Meta>
                                                 <Card.Description>
                                                     <b>Tarih: </b>{experience.startDate} / {experience.endDate}
@@ -72,7 +78,7 @@ export default function Cv() {
                                     ))}
                                     <ExperienceAdd cvId={cv.id} />
                                 </Card>
-                                <Card fluid style={{ marginTop: "1em" }} color="red">
+                                <Card fluid style={{ marginTop: ".5em" }} color="red">
                                     <Card.Content header='Yetenekler' />
                                     {cv.jobSeekerSkills.map(skill => (
                                         <Card fluid style={{ marginTop: "1em" }} key={skill.id}>
@@ -81,12 +87,13 @@ export default function Cv() {
                                                     <b>{skill.skillName}</b>
                                                 </Card.Description>
                                                 <SkillUpdateModal skill={skill} />
+                                                <SkillDeleteModal id={skill.id} />
                                             </Card.Content>
                                         </Card>
                                     ))}
                                     <SkillAdd cvId={cv.id} />
                                 </Card>
-                                <Card fluid style={{ marginTop: "1em" }} color="red">
+                                <Card fluid style={{ marginTop: ".5em" }} color="red">
                                     <Card.Content header='Yabancı Diller' />
                                     {cv.jobSeekerForeignLanguages.map(foreignLanguage => (
                                         <Card fluid style={{ marginTop: "1em" }} key={foreignLanguage.id}>
@@ -95,6 +102,7 @@ export default function Cv() {
                                                     <b>{foreignLanguage.languageName}</b>
                                                 </Card.Description>
                                                 <ForeignLanguageUpdateModal foreignLanguage={foreignLanguage} />
+                                                <ForeignLanguageDeleteModal id={foreignLanguage.id} />
                                                 <Card.Meta>{foreignLanguage.languageLevel}</Card.Meta>
                                             </Card.Content>
                                         </Card>
