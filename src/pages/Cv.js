@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react'
 import CvService from '../services/cvService';
 import { Button, Card, Image } from "semantic-ui-react";
 import EducationAdd from '../layouts/Cv/EducationAdd';
+import EducationUpdateModal from '../layouts/Cv/EducationUpdateModal';
 import ExperienceAdd from '../layouts/Cv/ExperienceAdd';
+import ExperienceUpdateModal from '../layouts/Cv/ExperienceUpdateModal';
 import ForeignLanguageAdd from '../layouts/Cv/ForeignLanguageAdd';
+import ForeignLanguageUpdateModal from '../layouts/Cv/ForeignLanguageUpdateModal';
 import SkillAdd from '../layouts/Cv/SkillAdd';
+import SkillUpdateModal from '../layouts/Cv/SkillUpdateModal';
 
 export default function Cv() {
 
@@ -39,6 +43,7 @@ export default function Cv() {
                                         <Card fluid style={{ marginTop: "1em" }} key={education.id}>
                                             <Card.Content>
                                                 <Card.Content><h4>{education.schoolName}</h4></Card.Content>
+                                                <EducationUpdateModal education={education} />
                                                 <Card.Meta>{education.fieldOfStudy}</Card.Meta>
                                                 <Card.Description>
                                                     <b>Derece: </b>{education.degree}
@@ -57,6 +62,7 @@ export default function Cv() {
                                         <Card fluid style={{ marginTop: "1em" }} key={experience.id}>
                                             <Card.Content>
                                                 <Card.Content><h4>{experience.businessName}</h4></Card.Content>
+                                                <ExperienceUpdateModal experience={experience} />
                                                 <Card.Meta>{experience.positionName}</Card.Meta>
                                                 <Card.Description>
                                                     <b>Tarih: </b>{experience.startDate} / {experience.endDate}
@@ -74,6 +80,7 @@ export default function Cv() {
                                                 <Card.Description>
                                                     <b>{skill.skillName}</b>
                                                 </Card.Description>
+                                                <SkillUpdateModal skill={skill} />
                                             </Card.Content>
                                         </Card>
                                     ))}
@@ -87,6 +94,7 @@ export default function Cv() {
                                                 <Card.Description>
                                                     <b>{foreignLanguage.languageName}</b>
                                                 </Card.Description>
+                                                <ForeignLanguageUpdateModal foreignLanguage={foreignLanguage} />
                                                 <Card.Meta>{foreignLanguage.languageLevel}</Card.Meta>
                                             </Card.Content>
                                         </Card>

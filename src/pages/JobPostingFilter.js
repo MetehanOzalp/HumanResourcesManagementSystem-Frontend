@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Segment, Label, Checkbox } from 'semantic-ui-react'
+import { Button, Segment, Label, Checkbox, Dropdown } from 'semantic-ui-react'
 import CityService from "../services/cityService";
 import JobPositionService from '../services/jobPositionService';
 import TypeOfWorkingService from "../services/typeOfWorkingService";
@@ -33,6 +33,7 @@ export default function JobPostingFilter({ clickEvent }) {
 
     const handleCityChange = (e, { value }) => {
         cityIds.push(value);
+        console.log(cityIds[cityIds.length - 1]);
     }
 
     const handleJobPositionChange = (e, { value }) => {
@@ -45,31 +46,44 @@ export default function JobPostingFilter({ clickEvent }) {
 
     const handleWayOfWorkingChange = (e, { value }) => {
         wayOfWorkingIds.push(value);
+        console.log(wayOfWorkingIds);
     }
+
+    //<Checkbox key={city.id} label={city.name} onChange={handleCityChange} value={city.id} />
 
     return (
         <div>
-            <Segment color="purple" raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="blue">Şehir</Label>
-                {cities.map(city => (
-                    <Checkbox key={city.id} label={city.name} onChange={handleCityChange} value={city.id} />))}
+            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+                <Label attached="top" color="purple">Şehir</Label>
+                <Dropdown
+                    clearable
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={cities.map((city) => {
+                        return { key: city.id, value: city.id, text: city.name }
+                    })}
+                    onChange={handleCityChange}
+                    placeholder='Sehirler'
+                />
             </Segment>
-            <Segment color="purple" raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="blue">İş Pozisyonu</Label>
+            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+                <Label attached="top" color="purple">İş Pozisyonu</Label>
                 {jobPositions.map(jobPosition => (
                     <Checkbox key={jobPosition.id} label={jobPosition.name} onChange={handleJobPositionChange} value={jobPosition.id} />))}
             </Segment>
-            <Segment color="purple" raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="blue">Çalışma Türü</Label>
+            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+                <Label attached="top" color="purple">Çalışma Türü</Label>
                 {typeOfWorkings.map(typeOfWorking => (
                     <Checkbox key={typeOfWorking.id} label={typeOfWorking.name} onChange={handleTypeOfWorkingChange} value={typeOfWorking.id} />))}
             </Segment>
-            <Segment color="purple" raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="blue">Çalışma Şekli</Label>
+            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+                <Label attached="top" color="purple">Çalışma Şekli</Label>
                 {wayOfWorkings.map(wayOfWorking => (
                     <Checkbox key={wayOfWorking.id} label={wayOfWorking.name} onChange={handleWayOfWorkingChange} value={wayOfWorking.id} />))}
             </Segment>
-            <Button fluid color="teal" onClick={() => clickEvent({ cityId: cityIds, jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds })}>Filtrele</Button>
+            <Button fluid primary onClick={() => clickEvent({ cityId: cityIds[cityIds.length - 1], jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds })}>Filtrele</Button>
         </div>
     )
 }

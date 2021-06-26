@@ -41,7 +41,7 @@ export default function JobPostingList() {
       jobPostingFilter.jobPositionId = null;
     }
     if (jobPostingFilter.typeOfWorkingId.length === 0) {
-      jobPostingFilter.typeOfWorkingId.cityId = null;
+      jobPostingFilter.typeOfWorkingId = null;
     }
     if (jobPostingFilter.wayOfWorkingId.length === 0) {
       jobPostingFilter.wayOfWorkingId = null;
