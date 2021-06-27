@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { Button, Form, Grid, GridColumn, Message, Label } from 'semantic-ui-react'
+import { Button, Form, Grid, GridColumn, Label } from 'semantic-ui-react'
 import *as Yup from "yup"
 import React, { useEffect, useState } from 'react'
 import JobPostingService from '../services/jobPostingService';

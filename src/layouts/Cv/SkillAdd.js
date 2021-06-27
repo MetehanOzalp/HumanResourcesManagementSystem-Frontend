@@ -5,13 +5,12 @@ import *as Yup from "yup"
 import { toast } from 'react-toastify';
 import CvService from '../../services/cvService';
 
-export default function SkillAdd({cvId}) {
+export default function SkillAdd({ cvId }) {
 
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        let cvService = new CvService();
-        // cvService.getCvByJobSeekerId(8).then((result) => setCvId(result.data.data[0].id));
+        //let cvService = new CvService();
     }, []);
 
     const { values, errors, handleChange, handleSubmit, touched } = useFormik({

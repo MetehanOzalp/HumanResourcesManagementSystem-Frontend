@@ -12,10 +12,10 @@ export default function JobPostingFilter({ clickEvent }) {
     const [wayOfWorkings, setWayOfWorkings] = useState([])
     const [jobPositions, setJobPositions] = useState([])
 
-    const [cityIds, setCityIds] = useState([])
-    const [typeOfWorkingIds, setTypeOfWorkingIds] = useState([])
-    const [wayOfWorkingIds, setWayOfWorkingIds] = useState([])
-    const [jobPositionIds, setJobPositionIds] = useState([])
+    const [cityIds] = useState([])
+    const [typeOfWorkingIds] = useState([])
+    const [wayOfWorkingIds] = useState([])
+    const [jobPositionIds] = useState([])
 
     useEffect(() => {
         let cityService = new CityService();
@@ -33,7 +33,6 @@ export default function JobPostingFilter({ clickEvent }) {
 
     const handleCityChange = (e, { value }) => {
         cityIds.push(value);
-        console.log(cityIds[cityIds.length - 1]);
     }
 
     const handleJobPositionChange = (e, { value }) => {
@@ -46,7 +45,6 @@ export default function JobPostingFilter({ clickEvent }) {
 
     const handleWayOfWorkingChange = (e, { value }) => {
         wayOfWorkingIds.push(value);
-        console.log(wayOfWorkingIds);
     }
 
     //<Checkbox key={city.id} label={city.name} onChange={handleCityChange} value={city.id} />

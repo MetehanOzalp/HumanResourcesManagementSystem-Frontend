@@ -10,8 +10,7 @@ export default function ForeignLanguageAdd({ cvId }) {
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
-        let cvService = new CvService();
-        // cvService.getCvByJobSeekerId(8).then((result) => setCvId(result.data.data[0].id));
+        //let cvService = new CvService();
     }, []);
 
     const { values, errors, handleChange, handleSubmit, touched } = useFormik({

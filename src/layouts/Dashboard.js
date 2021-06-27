@@ -1,7 +1,5 @@
 import React from "react";
 import EmployerList from "../pages/EmployerList";
-import Sidebar from "./Sidebar";
-import { Grid } from "semantic-ui-react";
 import JobSeekerList from "../pages/JobSeekerList";
 import EmployeeList from "../pages/EmployeeList";
 import JobPostingList from "../pages/JobPostingList";

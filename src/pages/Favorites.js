@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FavoriteService from '../services/favoriteService';
 import { Button, Card, Icon, Label } from "semantic-ui-react";
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function Favorites() {
 
@@ -25,8 +26,9 @@ export default function Favorites() {
         }
     }
 
-    const deleteToFavorites = () => {
+    const deleteToFavorites = (id) => {
         let favoriteService = new FavoriteService();
+        favoriteService.delete(id).then((toast.success("Favorilerden silindi!")));
     }
 
     return (
@@ -42,7 +44,7 @@ export default function Favorites() {
                             <Label color="green">{favorite.jobPosting?.wayOfWorking?.name}</Label>
                             {calculateDay(favorite.jobPosting?.releaseDate)}
                             <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${favorite.jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
-                            <Button color="red" floated="right" >Favorilerden kaldır <Icon name='delete' /></Button>
+                            <Button color="red" floated="right" onClick={() => deleteToFavorites(favorite.id)} >Favorilerden kaldır <Icon name='delete' /></Button>
                         </Card.Content>
                     </Card>
                 ))}

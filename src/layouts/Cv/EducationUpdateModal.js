@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import { Button, Form, Grid, GridColumn, Label, Segment, Modal, Icon } from 'semantic-ui-react'
+import { Button, Form, Grid, GridColumn, Label, Modal, Icon } from 'semantic-ui-react'
 import *as Yup from "yup"
 import { toast } from 'react-toastify';
 import CvService from '../../services/cvService';

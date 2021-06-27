@@ -30,11 +30,11 @@ export default function JobPostingList() {
 
   const handlePageChange = (e, { activePage }) => {
     setActivePage(activePage);
-    jobPostingService.getPageableJobPostings(activePage).then((result) => setJobPostings(result.data.data));
+    jobPostingService.getPageableAndFilterJobPostings(activePage, jobPostingFilter).then((result) => setJobPostings(result.data.data));
   }
 
   const handleJobPostingFilterClick = (jobPostingFilter) => {
-    if (jobPostingFilter.cityId.length === 0) {
+    if (!jobPostingFilter.cityId || jobPostingFilter.cityId.length === 0) {
       jobPostingFilter.cityId = null;
     }
     if (jobPostingFilter.jobPositionId.length === 0) {
@@ -46,6 +46,7 @@ export default function JobPostingList() {
     if (jobPostingFilter.wayOfWorkingId.length === 0) {
       jobPostingFilter.wayOfWorkingId = null;
     }
+    console.log(jobPostingFilter);
     setJobPostingFilter(jobPostingFilter);
   }
 
