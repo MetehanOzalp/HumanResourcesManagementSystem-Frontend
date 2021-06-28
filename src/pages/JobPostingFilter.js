@@ -47,11 +47,9 @@ export default function JobPostingFilter({ clickEvent }) {
         wayOfWorkingIds.push(value);
     }
 
-    //<Checkbox key={city.id} label={city.name} onChange={handleCityChange} value={city.id} />
-
     return (
         <div>
-            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+            <Segment raised style={{ marginTop: "1em" }}>
                 <Label attached="top" color="purple">Şehir</Label>
                 <Dropdown
                     clearable
@@ -66,17 +64,17 @@ export default function JobPostingFilter({ clickEvent }) {
                     placeholder='Sehirler'
                 />
             </Segment>
-            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+            <Segment raised style={{ marginTop: "1em" }}>
                 <Label attached="top" color="purple">İş Pozisyonu</Label>
                 {jobPositions.map(jobPosition => (
                     <Checkbox key={jobPosition.id} label={jobPosition.name} onChange={handleJobPositionChange} value={jobPosition.id} />))}
             </Segment>
-            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+            <Segment raised style={{ marginTop: "1em" }}>
                 <Label attached="top" color="purple">Çalışma Türü</Label>
                 {typeOfWorkings.map(typeOfWorking => (
-                    <Checkbox key={typeOfWorking.id} label={typeOfWorking.name} onChange={handleTypeOfWorkingChange} value={typeOfWorking.id} />))}
+                    <Checkbox key={typeOfWorking.id} label={typeOfWorking.name} onChange={handleTypeOfWorkingChange} value={typeOfWorking.id} style={{ marginRight: "1em" }} />))}
             </Segment>
-            <Segment color="blue" raised style={{ marginTop: "1em" }}>
+            <Segment raised style={{ marginTop: "1em" }}>
                 <Label attached="top" color="purple">Çalışma Şekli</Label>
                 {wayOfWorkings.map(wayOfWorking => (
                     <Checkbox key={wayOfWorking.id} label={wayOfWorking.name} onChange={handleWayOfWorkingChange} value={wayOfWorking.id} />))}

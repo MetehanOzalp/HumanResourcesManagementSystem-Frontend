@@ -27,8 +27,10 @@ export default function JobPostingDetail() {
   }
 
   function calculateHowManyDaysLeft(params) {
+    var nowDate = new Date();
+    var todayDate = nowDate.getFullYear() + "-" + (nowDate.getMonth() + 1) + "-" + nowDate.getDate();
     var applicationDeadline = new Date(params).getTime();
-    var date = new Date().getTime();
+    var date = new Date(todayDate).getTime();
     var remaniningTime = (((((applicationDeadline - date) / 1000) / 60) / 60) / 24);
     if (remaniningTime >= 0 && remaniningTime < 1) {
       return <Card.Content><Icon name="time" /><b>Son basvuru tarihi: </b>Son gün<Icon name="warning" color="red" /></Card.Content>

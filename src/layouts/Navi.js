@@ -21,7 +21,7 @@ export default function Navi() {
         <Container>
           <Menu.Item name="home">
             <Icon name="building outline" size="large" />
-            <Link to={`/`}>İnsan Kaynakları Yönetim Sistemi</Link>
+            <Link to={`/`}><h4>İnsan Kaynakları Yönetim Sistemi</h4></Link>
           </Menu.Item>
           <Menu.Item name="messages" />
 
