@@ -3,18 +3,23 @@ import { NavLink } from "react-router-dom";
 import { Button, Card, Icon, Label, Pagination, Grid } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 import JobPostingFilter from "./JobPostingFilter";
+import FavoriteService from "../services/favoriteService";
+import { toast } from "react-toastify";
 
 export default function JobPostingList() {
   const [jobPostings, setJobPostings] = useState([]);
   const [activePage, setActivePage] = useState(1);
-  const [jobPostingFilter, setJobPostingFilter] = useState({})
+  const [jobPostingFilter, setJobPostingFilter] = useState({});
+  const [favorites, setFavorites] = useState([]);
 
   let jobPostingService = new JobPostingService();
+  let favoriteService = new FavoriteService();
 
   useEffect(() => {
     jobPostingService
       .getPageableAndFilterJobPostings(activePage, jobPostingFilter)
       .then((result) => setJobPostings(result.data.data));
+    favoriteService.getByJobSeekerId(8).then(result => setFavorites(result.data.data));
   }, [jobPostingFilter]);
 
   function calculateDay(params) {
@@ -48,6 +53,27 @@ export default function JobPostingList() {
     }
     console.log(jobPostingFilter);
     setJobPostingFilter(jobPostingFilter);
+  }
+
+  const addToFavorites = (jobPostingId) => {
+    const favorite = {
+      userId: 8,
+      jobPostingId: jobPostingId
+    };
+    favoriteService.add(favorite).then(toast.success("Favorilere eklendi!"));
+  }
+
+  const deleteToFavorites = (jobPostingId) => {
+    favoriteService.delete(jobPostingId).then(toast.warning("Favorilerden silindi!"));
+  }
+
+  const checkIfFavoritesAdded = (id) => {
+    var jobSeekerFavorites = favorites.find(f => f.jobPostingId === id);
+    if (jobSeekerFavorites) {
+      return <Button onClick={() => deleteToFavorites(jobSeekerFavorites.id)} inverted basic circular floated="right" style={{ marginLeft: "17em" }}><Icon name="heart" color="red" size="large"></Icon></Button>
+    } else {
+      return <Button onClick={() => addToFavorites(id)} inverted basic circular floated="right" style={{ marginLeft: "17em" }}><Icon name="heart outline" color="red" size="large"></Icon></Button>
+    }
   }
 
   return (
@@ -141,7 +167,15 @@ export default function JobPostingList() {
           <Card.Group>
             {jobPostings.map(jobPosting => (
               <Card fluid key={jobPosting.id} color="teal">
-                <Card.Content header={jobPosting.jobPosition.name} />
+                <Grid>
+                  <Grid.Column width={8}>
+                    <Card.Header><h3 style={{ color: "black", marginTop: ".5em", marginLeft: ".8em" }}>{jobPosting.jobPosition.name}</h3></Card.Header>
+                  </Grid.Column>
+                  <Grid.Column width={8}>
+                    {checkIfFavoritesAdded(jobPosting.id)}
+                  </Grid.Column>
+                </Grid>
+
                 <Card.Content description={jobPosting.jobDescription} />
                 <Card.Content extra>
                   <Label color="blue"><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
@@ -163,6 +197,6 @@ export default function JobPostingList() {
           </Card.Group>
         </Grid.Column>
       </Grid>
-    </div>
+    </div >
   );
 }
