@@ -35,16 +35,37 @@ export default function JobPostingFilter({ clickEvent }) {
         cityIds.push(value);
     }
 
-    const handleJobPositionChange = (e, { value }) => {
-        jobPositionIds.push(value);
+    const handleJobPositionChange = (e, { value, checked }) => {
+        if (checked) {
+            jobPositionIds.push(value);
+        } else {
+            var index = jobPositionIds.indexOf(value);
+            if (index !== -1) {
+                jobPositionIds.splice(index, 1);
+            }
+        }
     }
 
-    const handleTypeOfWorkingChange = (e, { value }) => {
-        typeOfWorkingIds.push(value);
+    const handleTypeOfWorkingChange = (e, { value, checked }) => {
+        if (checked) {
+            typeOfWorkingIds.push(value);
+        } else {
+            var index = typeOfWorkingIds.indexOf(value);
+            if (index !== -1) {
+                typeOfWorkingIds.splice(index, 1);
+            }
+        }
     }
 
-    const handleWayOfWorkingChange = (e, { value }) => {
-        wayOfWorkingIds.push(value);
+    const handleWayOfWorkingChange = (e, { value, checked }) => {
+        if (checked) {
+            wayOfWorkingIds.push(value);
+        } else {
+            var index = wayOfWorkingIds.indexOf(value);
+            if (index !== -1) {
+                wayOfWorkingIds.splice(index, 1);
+            }
+        }
     }
 
     return (

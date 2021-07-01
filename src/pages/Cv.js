@@ -13,7 +13,6 @@ import EducationDeleteModal from '../layouts/Cv/EducationDeleteModal';
 import ExperienceDeleteModal from '../layouts/Cv/ExperienceDeleteModal';
 import SkillDeleteModal from '../layouts/Cv/SkillDeleteModal';
 import ForeignLanguageDeleteModal from '../layouts/Cv/ForeignLanguageDeleteModal';
-import { Link, NavLink } from "react-router-dom";
 
 export default function Cv() {
 
@@ -37,8 +36,8 @@ export default function Cv() {
                                 <Grid.Column width={11}>
                                     <Card.Header><h2>{cv.jobSeeker?.firstName} {cv.jobSeeker?.lastName}</h2></Card.Header>
                                     <Card.Description style={{ marginTop: ".5em" }}>{cv.coverLetter}</Card.Description>
-                                    <Card.Description style={{ marginTop: ".5em" }}><a href={cv.githubLink} target="_blank" style={{ color: "black" }}><Icon name="github" size="big" /><b>Github</b></a></Card.Description>
-                                    <Card.Description style={{ marginTop: ".5em" }}><a href={cv.linkedinLink} target="_blank" style={{ color: "black" }}><Icon name="linkedin" color="blue" size="big" /><b>Linkedin</b></a></Card.Description>
+                                    <Card.Description style={{ marginTop: ".5em" }}><a href={cv.githubLink} rel="noreferrer" target="_blank" style={{ color: "black" }}><Icon name="github" size="big" /><b>Github</b></a></Card.Description>
+                                    <Card.Description style={{ marginTop: ".5em" }}><a href={cv.linkedinLink} rel="noreferrer" target="_blank" style={{ color: "black" }}><Icon name="linkedin" color="blue" size="big" /><b>Linkedin</b></a></Card.Description>
                                 </Grid.Column>
                             </Grid>
                             <Card.Description>
