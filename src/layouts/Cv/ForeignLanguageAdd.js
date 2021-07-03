@@ -17,7 +17,7 @@ export default function ForeignLanguageAdd({ cvId }) {
         initialValues: {
             cvId: cvId,
             languageName: "",
-            languageLevel: "",
+            languageLevel: 1,
         },
         validationSchema:
             Yup.object({
@@ -59,11 +59,12 @@ export default function ForeignLanguageAdd({ cvId }) {
                                 <Form.Field>
                                     <label>Derece</label>
                                     <input type='range'
-                                        min={0}
+                                        defaultValue={0}
+                                        min={1}
                                         max={5}
                                         value={values.languageLevel} name="languageLevel" onChange={handleChange} />
                                     <br></br>
-                                    <Rating icon="star" size="large" rating={values.languageLevel} maxRating={5} />
+                                    <Rating icon="star" size="huge" rating={values.languageLevel} maxRating={5} />
                                     {
                                         errors.languageLevel && touched.languageLevel &&
                                         <Label basic color='red' pointing>

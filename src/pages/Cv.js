@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CvService from '../services/cvService';
-import { Button, Card, Image, Rating, Grid, Icon } from "semantic-ui-react";
+import { Button, Card, Image, Rating, Grid, Icon, Modal } from "semantic-ui-react";
 import EducationAdd from '../layouts/Cv/EducationAdd';
 import EducationUpdateModal from '../layouts/Cv/EducationUpdateModal';
 import ExperienceAdd from '../layouts/Cv/ExperienceAdd';
@@ -13,6 +13,7 @@ import EducationDeleteModal from '../layouts/Cv/EducationDeleteModal';
 import ExperienceDeleteModal from '../layouts/Cv/ExperienceDeleteModal';
 import SkillDeleteModal from '../layouts/Cv/SkillDeleteModal';
 import ForeignLanguageDeleteModal from '../layouts/Cv/ForeignLanguageDeleteModal';
+import ImageUpdateModal from '../layouts/Cv/ImageUpdateModal';
 
 export default function Cv() {
 
@@ -23,6 +24,8 @@ export default function Cv() {
         cvService.getCvByJobSeekerId(8).then((result) => setCvs(result.data.data));
     }, []);
 
+    const [open, setOpen] = React.useState(false)
+
     return (
         <div>
             <Card.Group>
@@ -31,7 +34,8 @@ export default function Cv() {
                         <Card.Content>
                             <Grid>
                                 <Grid.Column width={5}>
-                                    <Image floated="left" size="medium" src={cv.imagePath} />
+                                    <Image floated="left" size="medium" circular src={cv.imagePath} label={{ as: 'a', color: 'green', corner: 'right', icon: 'pencil' }} onClick={() => setOpen(true)}></Image>
+                                    {open ? <ImageUpdateModal cvId={cv.id} /> : null}
                                 </Grid.Column>
                                 <Grid.Column width={11}>
                                     <Card.Header><h2>{cv.jobSeeker?.firstName} {cv.jobSeeker?.lastName}</h2></Card.Header>
@@ -166,13 +170,13 @@ export default function Cv() {
                                 </Card>
                             </Card.Description>
                         </Card.Content>
-                        <Card.Content extra>
+                        {/* <Card.Content extra>
                             <div className="ui two buttons">
                                 <Button color="teal">
                                     Güncelle
                                 </Button>
                             </div>
-                        </Card.Content>
+                        </Card.Content> */}
                     </Card>
                 ))}
             </Card.Group>

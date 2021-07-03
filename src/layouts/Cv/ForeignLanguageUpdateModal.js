@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useFormik } from 'formik'
-import { Button, Form, Grid, GridColumn, Label, Modal, Icon } from 'semantic-ui-react'
+import { Button, Form, Grid, GridColumn, Label, Modal, Icon, Rating } from 'semantic-ui-react'
 import *as Yup from "yup"
 import { toast } from 'react-toastify';
 import CvService from '../../services/cvService';
@@ -55,13 +55,13 @@ export default function ForeignLanguageUpdateModal({ foreignLanguage }) {
                             <GridColumn width={7}>
                                 <Form.Field>
                                     <label>Derece</label>
-                                    <input name="languageLevel" placeholder='Derece' value={values.languageLevel} onChange={handleChange} />
-                                    {
-                                        errors.languageLevel && touched.languageLevel &&
-                                        <Label basic color='red' pointing>
-                                            {errors.languageLevel}
-                                        </Label>
-                                    }
+                                    <input type='range'
+                                        defaultValue={0}
+                                        min={1}
+                                        max={5}
+                                        value={values.languageLevel} name="languageLevel" onChange={handleChange} />
+                                    <br></br>
+                                    <Rating icon="star" size="huge" rating={values.languageLevel} maxRating={5} />
                                 </Form.Field>
                             </GridColumn>
                         </Grid>

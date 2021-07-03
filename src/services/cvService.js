@@ -52,4 +52,8 @@ export default class CvService {
     deleteSkills(id) {
         return axios.delete(`http://localhost:8080/api/jobSeekerSkills/delete?id=${id}`);
     }
+
+    updateImage(values) {
+        return axios.put(`http://localhost:8080/api/curriculumVitaes/imageUpdate?curriculumVitaeId=${values.curriculumVitaeId}`, values.file);
+    }
 }
