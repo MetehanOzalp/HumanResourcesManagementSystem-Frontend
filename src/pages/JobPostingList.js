@@ -20,7 +20,7 @@ export default function JobPostingList() {
       .getPageableAndFilterJobPostings(activePage, jobPostingFilter)
       .then((result) => setJobPostings(result.data.data));
     favoriteService.getByJobSeekerId(8).then(result => setFavorites(result.data.data));
-  }, [jobPostingFilter, favorites]);
+  }, [jobPostingFilter]);
 
   function calculateDay(params) {
     var date = new Date().getTime();

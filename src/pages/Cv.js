@@ -22,7 +22,7 @@ export default function Cv() {
     useEffect(() => {
         let cvService = new CvService();
         cvService.getCvByJobSeekerId(8).then((result) => setCvs(result.data.data));
-    }, [cvs]);
+    }, []);
 
     const [open, setOpen] = React.useState(false)
 
