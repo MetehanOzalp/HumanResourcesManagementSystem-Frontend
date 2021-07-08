@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Card, Icon, Label, Pagination, Grid } from "semantic-ui-react";
+import { Button, Card, Icon, Label, Pagination, Grid, Loader } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 import JobPostingFilter from "./JobPostingFilter";
 import FavoriteService from "../services/favoriteService";
@@ -78,125 +78,46 @@ export default function JobPostingList() {
 
   return (
     <div>
-      {/* <Header size="large">İs İlanları</Header>
-      <Table selectable>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Açıklama</Table.HeaderCell>
-            <Table.HeaderCell>Sirket Adı</Table.HeaderCell>
-            <Table.HeaderCell>Sehir</Table.HeaderCell>
-            <Table.HeaderCell>Alım Sayısı</Table.HeaderCell>
-            <Table.HeaderCell>Son Basvuru Tarihi</Table.HeaderCell>
-            <Table.HeaderCell>Maas Aralıgı</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
+      {jobPostings.length > 0 ?
+        <Grid>
+          <Grid.Column width={4}>
+            <JobPostingFilter clickEvent={handleJobPostingFilterClick} />
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <Card.Group>
+              {jobPostings.map(jobPosting => (
+                <Card fluid key={jobPosting.id} color="teal" style={{ borderRadius: 10 }}>
+                  <Grid>
+                    <Grid.Column width={8}>
+                      <Card.Header><h3 style={{ color: "black", marginTop: ".5em", marginLeft: ".8em" }}>{jobPosting.jobPosition.name}</h3></Card.Header>
+                    </Grid.Column>
+                    <Grid.Column width={8}>
+                      {checkIfFavoritesAdded(jobPosting.id)}
+                    </Grid.Column>
+                  </Grid>
 
-        <Table.Body>
-          {jobPostings.map((jobPosting) => (
-            <Table.Row key={jobPosting.id}>
-              <Table.Cell>{jobPosting.jobDescription}</Table.Cell>
-              <Table.Cell>{jobPosting.employer.companyName}</Table.Cell>
-              <Table.Cell>{jobPosting.city.name}</Table.Cell>
-              <Table.Cell>{jobPosting.openPositionCount}</Table.Cell>
-              <Table.Cell>{jobPosting.applicationDeadline}</Table.Cell>
-              <Table.Cell>
-                {jobPosting.minSalary} - {jobPosting.maxSalary}
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
+                  <Card.Content description={jobPosting.jobDescription} />
+                  <Card.Content extra>
+                    <Label color="blue"><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
+                    <Label color="orange">{jobPosting.typeOfWorking?.name}</Label>
+                    <Label color="green">{jobPosting.wayOfWorking?.name}</Label>
+                    {calculateDay(jobPosting.releaseDate)}
+                    <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`} style={{ borderRadius: 10 }}>Detaylar<Icon name='right chevron' /></Button>
+                  </Card.Content>
+                </Card>
+              ))}
+              <Pagination
+                defaultActivePage={1}
+                pointing
+                secondary
+                totalPages={3}
+                onPageChange={handlePageChange}
+              />
+              {/* <Pagination defaultActivePage={5} totalPages={10} onPageChange={() => (handlePageChange)} /> */}
+            </Card.Group>
+          </Grid.Column>
+        </Grid> : <Loader active inline='centered' />}
 
-        <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan="6">
-              <Menu floated="right" pagination>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron left" />
-                </Menu.Item>
-                <Menu.Item as="a">1</Menu.Item>
-                <Menu.Item as="a">2</Menu.Item>
-                <Menu.Item as="a">3</Menu.Item>
-                <Menu.Item as="a">4</Menu.Item>
-                <Menu.Item as="a" icon>
-                  <Icon name="chevron right" />
-                </Menu.Item>
-              </Menu>
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
-      </Table> */}
-
-
-      {/* <Item.Group divided>
-        {jobPostings.map((jobPosting) => (
-          <Item key={jobPosting.id}>
-            <Item.Content>
-              <Item.Header as={NavLink} to={`/jobPostings/${jobPosting.id}`}>
-                {jobPosting.jobPosition.name}
-              </Item.Header>
-              <Item.Meta>
-                <span className="cinema">
-                  {jobPosting.employer.companyName}
-                </span>
-              </Item.Meta>
-              <Item.Description>{jobPosting.jobDescription}</Item.Description>
-              <Item.Extra>
-                <Button
-                  primary
-                  floated="right"
-                  as={NavLink}
-                  to={`/jobPostings/${jobPosting.id}`}
-                >
-                  Detaylar
-                  <Icon name="right chevron" />
-                </Button>
-                <Label>Açık pozisyon : {jobPosting.openPositionCount}</Label>
-                <Label>{jobPosting.typeOfWorking?.name}</Label>
-                <Label>{jobPosting.wayOfWorking?.name}</Label>
-              </Item.Extra>
-            </Item.Content>
-          </Item>
-        ))}
-      </Item.Group> */}
-
-      <Grid>
-        <Grid.Column width={4}>
-          <JobPostingFilter clickEvent={handleJobPostingFilterClick} />
-        </Grid.Column>
-        <Grid.Column width={12}>
-          <Card.Group>
-            {jobPostings.map(jobPosting => (
-              <Card fluid key={jobPosting.id} color="teal">
-                <Grid>
-                  <Grid.Column width={8}>
-                    <Card.Header><h3 style={{ color: "black", marginTop: ".5em", marginLeft: ".8em" }}>{jobPosting.jobPosition.name}</h3></Card.Header>
-                  </Grid.Column>
-                  <Grid.Column width={8}>
-                    {checkIfFavoritesAdded(jobPosting.id)}
-                  </Grid.Column>
-                </Grid>
-
-                <Card.Content description={jobPosting.jobDescription} />
-                <Card.Content extra>
-                  <Label color="blue"><Icon name='user' />Açık pozisyon : {jobPosting.openPositionCount}</Label>
-                  <Label color="orange">{jobPosting.typeOfWorking?.name}</Label>
-                  <Label color="green">{jobPosting.wayOfWorking?.name}</Label>
-                  {calculateDay(jobPosting.releaseDate)}
-                  <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`}>Detaylar<Icon name='right chevron' /></Button>
-                </Card.Content>
-              </Card>
-            ))}
-            <Pagination
-              defaultActivePage={1}
-              pointing
-              secondary
-              totalPages={3}
-              onPageChange={handlePageChange}
-            />
-            {/* <Pagination defaultActivePage={5} totalPages={10} onPageChange={() => (handlePageChange)} /> */}
-          </Card.Group>
-        </Grid.Column>
-      </Grid>
     </div >
   );
 }

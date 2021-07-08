@@ -6,7 +6,7 @@ import Navi from "./layouts/Navi";
 
 function App() {
   return (
-    <div className="App" style={{ backgroundColor: "#F8F8FF" }}>
+    <div className="App" style={{ backgroundColor: "#F8F8FF", minHeight: "935px" }}>
       <Navi />
       <Container className="main">
         <Dashboard />

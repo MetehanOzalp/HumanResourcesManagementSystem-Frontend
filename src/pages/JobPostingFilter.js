@@ -70,37 +70,39 @@ export default function JobPostingFilter({ clickEvent }) {
 
     return (
         <div>
-            <Segment raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="purple">Şehir</Label>
-                <Dropdown
-                    clearable
-                    fluid
-                    multiple
-                    search
-                    selection
-                    options={cities.map((city) => {
-                        return { key: city.id, value: city.id, text: city.name }
-                    })}
-                    onChange={handleCityChange}
-                    placeholder='Sehirler'
-                />
+            <Segment raised style={{ borderRadius: 10 }}>
+                <Segment raised>
+                    <Label attached="top" color="purple">Şehir</Label>
+                    <Dropdown
+                        clearable
+                        fluid
+                        multiple
+                        search
+                        selection
+                        options={cities.map((city) => {
+                            return { key: city.id, value: city.id, text: city.name }
+                        })}
+                        onChange={handleCityChange}
+                        placeholder='Sehirler'
+                    />
+                </Segment>
+                <Segment raised style={{ marginTop: "1em" }}>
+                    <Label attached="top" color="purple">İş Pozisyonu</Label>
+                    {jobPositions.map(jobPosition => (
+                        <Checkbox key={jobPosition.id} label={jobPosition.name} onChange={handleJobPositionChange} value={jobPosition.id} />))}
+                </Segment>
+                <Segment raised style={{ marginTop: "1em" }}>
+                    <Label attached="top" color="purple">Çalışma Türü</Label>
+                    {typeOfWorkings.map(typeOfWorking => (
+                        <Checkbox key={typeOfWorking.id} label={typeOfWorking.name} onChange={handleTypeOfWorkingChange} value={typeOfWorking.id} style={{ marginRight: "1em" }} />))}
+                </Segment>
+                <Segment raised style={{ marginTop: "1em" }}>
+                    <Label attached="top" color="purple">Çalışma Şekli</Label>
+                    {wayOfWorkings.map(wayOfWorking => (
+                        <Checkbox key={wayOfWorking.id} label={wayOfWorking.name} onChange={handleWayOfWorkingChange} value={wayOfWorking.id} />))}
+                </Segment>
+                <Button fluid primary onClick={() => clickEvent({ cityId: cityIds[cityIds.length - 1], jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds })}>Filtrele</Button>
             </Segment>
-            <Segment raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="purple">İş Pozisyonu</Label>
-                {jobPositions.map(jobPosition => (
-                    <Checkbox key={jobPosition.id} label={jobPosition.name} onChange={handleJobPositionChange} value={jobPosition.id} />))}
-            </Segment>
-            <Segment raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="purple">Çalışma Türü</Label>
-                {typeOfWorkings.map(typeOfWorking => (
-                    <Checkbox key={typeOfWorking.id} label={typeOfWorking.name} onChange={handleTypeOfWorkingChange} value={typeOfWorking.id} style={{ marginRight: "1em" }} />))}
-            </Segment>
-            <Segment raised style={{ marginTop: "1em" }}>
-                <Label attached="top" color="purple">Çalışma Şekli</Label>
-                {wayOfWorkings.map(wayOfWorking => (
-                    <Checkbox key={wayOfWorking.id} label={wayOfWorking.name} onChange={handleWayOfWorkingChange} value={wayOfWorking.id} />))}
-            </Segment>
-            <Button fluid primary onClick={() => clickEvent({ cityId: cityIds[cityIds.length - 1], jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds })}>Filtrele</Button>
         </div>
     )
 }
