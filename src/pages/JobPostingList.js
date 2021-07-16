@@ -86,7 +86,7 @@ export default function JobPostingList() {
           <Grid.Column width={12}>
             <Card.Group>
               {jobPostings.map(jobPosting => (
-                <Card fluid key={jobPosting.id} color="teal" style={{ borderRadius: 10 }}>
+                <Card as={NavLink} to={`/jobPostings/${jobPosting.id}`} fluid key={jobPosting.id} color="teal" style={{ borderRadius: 10 }}>
                   <Grid>
                     <Grid.Column width={8}>
                       <Card.Header><h3 style={{ color: "black", marginTop: ".5em", marginLeft: ".8em" }}>{jobPosting.jobPosition.name}</h3></Card.Header>
@@ -102,7 +102,7 @@ export default function JobPostingList() {
                     <Label color="orange">{jobPosting.typeOfWorking?.name}</Label>
                     <Label color="green">{jobPosting.wayOfWorking?.name}</Label>
                     {calculateDay(jobPosting.releaseDate)}
-                    <Button color="teal" floated="right" as={NavLink} to={`/jobPostings/${jobPosting.id}`} style={{ borderRadius: 10 }}>Detaylar<Icon name='right chevron' /></Button>
+                    <Button color="teal" floated="right" style={{ borderRadius: 10 }}>Detaylar<Icon name='right chevron' /></Button>
                   </Card.Content>
                 </Card>
               ))}

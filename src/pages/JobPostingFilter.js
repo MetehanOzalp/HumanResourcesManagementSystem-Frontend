@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Segment, Label, Checkbox, Dropdown } from 'semantic-ui-react'
+import { Button, Segment, Label, Checkbox, Dropdown, Input, Form } from 'semantic-ui-react'
 import CityService from "../services/cityService";
 import JobPositionService from '../services/jobPositionService';
 import TypeOfWorkingService from "../services/typeOfWorkingService";
@@ -16,6 +16,8 @@ export default function JobPostingFilter({ clickEvent }) {
     const [typeOfWorkingIds] = useState([])
     const [wayOfWorkingIds] = useState([])
     const [jobPositionIds] = useState([])
+    const [minSalary, setMinSalary] = useState(0);
+    const [maxSalary, setMaxSalary] = useState(0);
 
     useEffect(() => {
         let cityService = new CityService();
@@ -68,6 +70,14 @@ export default function JobPostingFilter({ clickEvent }) {
         }
     }
 
+    const handleMinSalaryChange = (e, { value }) => {
+        setMinSalary(value);
+    }
+
+    const handleMaxSalaryChange = (e, { value }) => {
+        setMaxSalary(value);
+    }
+
     return (
         <div>
             <Segment raised style={{ borderRadius: 10 }}>
@@ -101,8 +111,17 @@ export default function JobPostingFilter({ clickEvent }) {
                     {wayOfWorkings.map(wayOfWorking => (
                         <Checkbox key={wayOfWorking.id} label={wayOfWorking.name} onChange={handleWayOfWorkingChange} value={wayOfWorking.id} />))}
                 </Segment>
-                <Button fluid primary onClick={() => clickEvent({ cityId: cityIds[cityIds.length - 1], jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds })}>Filtrele</Button>
+                <Segment raised style={{ marginTop: "1em" }}>
+                    <Label attached="top" color="purple">Maaş Aralığı</Label>
+                    <Form>
+                        <Form.Group>
+                            <Form.Input fluid label='Minimum maaş' placeholder='Minimum' onChange={handleMinSalaryChange} />
+                            <Form.Input fluid label='Maksimum maaş' placeholder='Maksimum' onChange={handleMaxSalaryChange} />
+                        </Form.Group>
+                    </Form>
+                </Segment>
+                <Button fluid primary onClick={() => clickEvent({ cityId: cityIds[cityIds.length - 1], jobPositionId: jobPositionIds, typeOfWorkingId: typeOfWorkingIds, wayOfWorkingId: wayOfWorkingIds, minSalary: minSalary, maxSalary: maxSalary })}>Filtrele</Button>
             </Segment>
-        </div>
+        </div >
     )
 }
